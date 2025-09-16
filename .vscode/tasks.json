@@ -1,0 +1,31 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "Render Quarto slides",
+			"type": "shell",
+			"command": "quarto",
+			"args": [
+				"render",
+				"python-conda-course.qmd",
+				"--to",
+				"revealjs"
+			],
+			"isBackground": false,
+			"group": "build"
+		},
+		{
+			"label": "Render Quarto slides (src)",
+			"type": "shell",
+			"command": "quarto",
+			"args": [
+				"render",
+				"src/python-conda-course.qmd",
+				"--to",
+				"revealjs"
+			],
+			"isBackground": false,
+			"group": "build"
+		}
+	]
+}

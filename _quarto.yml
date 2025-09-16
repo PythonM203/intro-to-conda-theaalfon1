@@ -1,29 +1,23 @@
 project:
   type: website
-  title: "Your Course Title"
+  title: "Introduction to Python and Conda"
   output-dir: "_site"
   
 website:
-  title: "Your Course Title"
-  description: "Your Course Description"
-  site-url: "https://your-site-url.com"
-  repo-url: "https://github.com/your-repo-url"
+  title: "Introduction to Python and Conda"
+  description: "This course provides a comprehensive introduction to Python programming and the Conda package management system."
+  repo-url: "https://github.com/jfimbett/PythonConda"
   
   navbar:
-    title: "Your Course Title"
+    title: "Intro to Python & Conda"
     left:
       - text: "Home"
         href: index.html
-      - text: "Course Days"
-        menu:
-          - text: "Day 1: Title"
-            href: src/lectures/day1/lecture/index.qmd
-          - text: "Day 2: Title"
-            href: src/lectures/day2/lecture/index.qmd
-            # Add more days as needed
+      - text: "Slides"
+        href: src/python-conda-course.qmd
     right:
       - icon: github
-        href: "https://github.com/your-repo-url"
+        href: "https://github.com/jfimbett/PythonConda"
 
 format:
   html:
@@ -51,6 +45,7 @@ format:
     controls: true
     progress: true
     center: false
+    incremental: true
     
 execute:
   freeze: auto
