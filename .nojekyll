@@ -1,4 +1,4 @@
-cd C:\Users\jfimb\Dropbox\TemplateCourse 
-git add _site/src/lectures/day1/lecture/index.html
+cd C:\Users\jfimb\Documents\PythonConda 
+git add _site\src\python-conda-course.html
 git commit -m "Add lecture index.html"
 git push

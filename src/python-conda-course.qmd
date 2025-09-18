@@ -2,7 +2,7 @@
 title: "Introduction to Python and Conda"
 subtitle: "Master 2 (203) in Financial Markets — Paris Dauphine | PSL"
 author: "Juan F. Imbet"
-date: "2025-09-16"
+date: "Sept 2025"
 format: 
   revealjs:
     theme: white
@@ -17,32 +17,20 @@ format:
 lang: en
 ---
 
-# Course overview
-
-- Title: Introduction to Python and Conda
-- Program: Master 2 (203) in Financial Markets, Paris Dauphine — PSL University
-- Instructor: Juan F. Imbet
-- Goal: Get productive with Python using Conda, Jupyter, and VS Code/Codespaces in one day
-- Outcomes: Install Conda, manage environments, use Jupyter/VS Code, and know when to use pip/virtualenv
-
----
-
 # Agenda
 
-- Python history and ecosystem landscape
+- Quick Python history and ecosystem landscape
 - Why manage Python with Conda (vs. system Python)
 - Install options: Miniconda vs. Anaconda vs. Mambaforge
 - Environments: create, activate, export, reproduce
 - Package management: conda and pip together (best practices)
-- Jupyter (Notebook/Lab): workflows and tips
-- VS Code and GitHub Codespaces setup for Python
 - Alternatives: pip + venv/virtualenv and when to choose them
 
 ---
 
 # Python: a brief history
 
-- 1991: Python 0.9 by Guido van Rossum (ABC-inspired, batteries-included)
+- 1991: Python 0.9 by Guido van Rossum 
 - 2000: Python 2.0 (list comprehensions, GC); 2008: Python 3.0 (unicode, cleanups)
 - 2020: EOL for Python 2 — modern stack is Python 3.x
 - Strengths: readability, rich ecosystem (data, web, ML, finance)
@@ -58,7 +46,6 @@ lang: en
 - Community + tooling: Jupyter, VS Code, CI/CD, packaging
 - Strong adoption in quant/market data/analytics
 
----
 
 # Why Conda (big picture)
 
@@ -73,12 +60,9 @@ lang: en
 # Conda flavors and choices
 
 - Anaconda: full suite of packages; big download; great offline start
-- Miniconda: minimal installer; add only what you need (recommended)
+- Miniconda: minimal installer; add only what you need 
 - Mambaforge/Miniforge: conda-forge-first with fast solver (mamba)
 - Codespaces: often preinstalled; check `conda --version`
-- Choose: Miniconda or Mambaforge for lightweight, conda-forge channel
-
----
 
 # Install Conda (Windows/macOS/Linux)
 
@@ -92,21 +76,21 @@ lang: en
 
 # Configure Conda defaults
 
+- A Conda default is a url to a channel (repo) of packages
 - Prefer conda-forge: `conda config --add channels conda-forge`
 - Make it top priority: `conda config --set channel_priority strict`
 - Show config file: `conda config --show-sources`
-- Where is it? Windows: `%USERPROFILE%/.condarc`
+- Where is it? Windows: `%USERPROFILE%/.condarc`, macOS/Linux: `~/.condarc`
 - Export for portability: include channels in `environment.yml`
 
----
 
 # Create and manage environments
 
-- Create: `conda create -n fm203-py310 python=3.10 numpy pandas -y`
-- Activate/deactivate: `conda activate fm203-py310` / `conda deactivate`
+- Create: `conda create -n my_env311 python=3.11 numpy pandas -y`
+- Activate/deactivate: `conda activate my_env311` / `conda deactivate`
 - List envs: `conda env list` (or `conda info --envs`)
-- Remove: `conda remove -n fm203-py310 --all`
-- Update Python: `conda install -n fm203-py310 python=3.12`
+- Remove: `conda remove -n my_env311 --all`
+- Update Python: `conda install -n my_env311 python=3.12`
 
 ---
 
@@ -118,13 +102,12 @@ lang: en
 - Pin versions: `conda install pandas=2.2 numpy=1.26`
 - Rollback using revisions: `conda list --revisions` → `conda install --revision N`
 
----
 
 # Mixing conda and pip (safely)
 
 - Prefer conda for compiled libs; pip for packages not on conda-forge
 - Order matters: conda first, then pip in the same env
-- Use `pip` inside the activated env (no sudo)
+- Use `pip` inside the activated env 
 - Record dependencies: `pip freeze > requirements.txt` and `conda env export --from-history`
 - Avoid `pip install --upgrade pip` breaking solver; use `python -m pip install --upgrade pip`
 
@@ -140,66 +123,12 @@ lang: en
 
 ---
 
-# Jupyter Notebook basics
-
-- Start Notebook: `jupyter notebook` (in env)
-- Create a new Python 3 notebook (kernel from active env)
-- Cells: code vs. markdown; run with Shift+Enter
-- Save checkpoints; use headings and sections for structure
-- Export to HTML/PDF via File → Download as
-
----
-
-# JupyterLab essentials
-
-- Start: `jupyter lab` (file browser, terminals, extensions)
-- Multiple notebooks/tabs and integrated text editor
-- Variable inspector, table viewers (via extensions)
-- Use conda env kernels: `python -m ipykernel install --user --name fm203-py310`
-- Stop server with Ctrl+C; restart kernels to clear state
-
----
-
-# Quick Notebook demo (pandas)
-
-```python
-import pandas as pd
-import numpy as np
-
-df = pd.DataFrame({
-    "date": pd.date_range("2025-01-01", periods=5, freq="B"),
-    "price": np.round(np.random.lognormal(mean=0, sigma=0.05, size=5)*100, 2),
-})
-
-df["ret"] = df["price"].pct_change()
-print(df.describe(include="all"))
-```
-
-- Demonstrates DataFrame creation and simple returns
-- Use plots: `df.price.plot()` in Notebook
-- Save to CSV: `df.to_csv("prices.csv", index=False)`
-- Read back: `pd.read_csv("prices.csv")`
-- Mind the working directory (shown in `pwd` / `%pwd`)
-
----
-
 # VS Code for Python (local)
 
 - Install extensions: Python, Jupyter, Pylance
 - Select interpreter: Command Palette → "Python: Select Interpreter"
-- Run and debug: create launch configs; use breakpoints
-- Integrated terminal activated with conda env
-- Linting/formatting: Pylance, Ruff/flake8, Black
+- Run and debug: use the `#%%` markers for cells to mimic Jupyter inside of the IDE.
 
----
-
-# GitHub Codespaces setup
-
-- Open the repo in Codespaces; Python and conda often preinstalled
-- Check envs: `conda env list`; activate project env
-- Configure VS Code extensions in `.devcontainer/devcontainer.json` (optional)
-- Persist deps via `environment.yml` and postCreateCommand to create env
-- Use Jupyter in-browser; connect kernel to conda env
 
 ---
 
@@ -209,9 +138,8 @@ print(df.describe(include="all"))
 - Install: `python -m pip install numpy pandas jupyterlab`
 - Freeze deps: `python -m pip freeze > requirements.txt`
 - Recreate: `python -m venv .venv && pip install -r requirements.txt`
-- When to prefer: simple apps, pure-Python deps, slim Docker images
+- When to prefer: simple apps, pure-Python deps, slim projects.
 
----
 
 # virtualenvwrapper and tools
 
@@ -231,17 +159,7 @@ print(df.describe(include="all"))
 - GPU packages: match CUDA version; prefer conda-forge builds
 - Windows specifics: use cmd/PowerShell; avoid system Python mix-ups
 
----
 
-# Practice exercises
-
-- Create env `fm203-lab` with Python 3.11, numpy, pandas, jupyterlab
-- Launch JupyterLab and create a notebook; compute daily returns
-- Install scikit-learn; run a simple LinearRegression on toy data
-- Export env to `environment.yml`; recreate on another machine
-- Try venv: set up `.venv` and run the same notebook
-
----
 
 # References
 
@@ -251,12 +169,3 @@ print(df.describe(include="all"))
 - VS Code Python: https://code.visualstudio.com/docs/python/python-tutorial
 - Python: https://www.python.org/
 
----
-
-# Thank you
-
-- Slides: this repository
-- Questions: raise issues in GitHub or email the instructor
-- Good luck with your projects!
-- Remember to commit your environment files
-- Keep environments per-project for sanity
